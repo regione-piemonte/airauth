@@ -10,10 +10,10 @@ Fornisce uno strumento avanzato per definire le caratteristiche degli utenti e i
 
 Le componenti di questo prodotto sono:
 
-* airauth-dbauth2: https://github.com/regione-piemonte/airauth/dbauth2
-* airauth-authdbmanager: https://github.com/regione-piemonte/airauth/authdbmanager
-* airauth-authservice: https://github.com/regione-piemonte/airauth/authservice
-* airauth-webauth: https://github.com/regione-piemonte/airauth/webauth
+* dbauth2
+* authdbmanager
+* authservice
+* webauth
 
 
 # Prerequisiti di sistema 
