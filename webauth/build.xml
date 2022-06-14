@@ -1,0 +1,79 @@
+<!-- Title:  Build procedure for the project airauth -->
+<!-- Author: Pierfrancesco.Vallosio@consulenti.csi.it -->
+<!-- Date:   16-Oct-2002 -->
+<!-- $Id: build.xml,v 1.149 2021/10/12 13:48:09 vespa Exp $ -->
+
+<project name="Webauth" default="all" basedir=".">
+
+	<description>
+       Build procedure for the project Airauth-webauth
+  </description>
+
+	<!-- set global properties for this build -->
+	<property name="ant.build.javac.source" value="1.8" />
+	<property name="ant.build.javac.target" value="1.8" />
+	<property name="src" location="./src/java" />
+	<property name="lib" location="./lib" />
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+
+
+	<property file="buildfiles/build.properties" />
+	<property file="buildfiles/${target}.properties" />
+	
+
+
+	<target name="all" depends="dist-webauth2" description="Build all the project">
+		</target>
+	
+
+	
+	<target name="clean" description="clean up">
+			<!-- Delete the ${build} and ${dist} directory trees -->
+			<delete dir="${build}" />
+			<delete dir="${dist}" />
+		</target>
+
+	<target name="compile-webauth2" depends="clean" description="Compile Webauth servlet">
+		<mkdir dir="${build}/webauth" />
+		<javac srcdir="${src}" destdir="${build}/webauth" classpath="${lib}/servlet-api-2.5.jar:${lib}/log4j-1.2.16.jar:${lib}/auth-dao-1.0.0.jar:${lib}/auth-model-1.0.0.jar:${lib}/velocity-1.6.4.jar:${lib}/commons-codec-1.4.jar"  debug="on">
+			<include name="it/csi/aria/util/servlet/**" />
+			<include name="it/csi/aria/portal/servlet/**" />
+			<include name="it/csi/aria/dbmanager/webauth/**" />
+			<exclude name="it/csi/aria/dbmanager/webauth/db/**" />
+		</javac>
+	</target>
+
+	<target name="dist-webauth2" depends="compile-webauth2" description="Generate Webauth servlet archive">
+		<mkdir dir="${dist}/webauth" />
+		<mkdir dir="${build}/webauth/META-INF"/>
+		<copy file="${src}/it/csi/aria/dbmanager/webauth/META-INF/context.xml" todir="${build}/webauth/META-INF"/>
+		<replace file="${build}/webauth/META-INF/context.xml" token="@@@@DBAUTH_HOST@@@@" value="${dbauth_host}" />
+		<replace file="${build}/webauth/META-INF/context.xml" token="@@@@DBAUTH_PORT@@@@" value="${dbauth_port}" />
+		<replace file="${build}/webauth/META-INF/context.xml" token="@@@@DBAUTH@@@@" value="${dbauth}" />
+		<replace file="${build}/webauth/META-INF/context.xml" token="@@@@DBAUTH_USER@@@@" value="${dbauth_user}" />
+		<replace file="${build}/webauth/META-INF/context.xml" token="@@@@DBAUTH_PWD@@@@" value="${dbauth_pwd}" />
+		<copy file="${src}/it/csi/aria/dbmanager/webauth/ariaweb/log4j.properties" todir="${build}/webauth" />
+		<war destfile="${dist}/webauth/webauth2.war" webxml="${src}/it/csi/aria/dbmanager/webauth/web.xml">
+			<classes dir="${build}/webauth" />
+			<classes dir="src/templates/" />
+			<zipfileset dir="src/css" prefix="css" />
+			<zipfileset dir="src/images/portal" prefix="css/images" />
+			<lib file="${lib}/log4j-1.2.16.jar" />
+			<lib file="${lib}/velocity-1.6.4.jar" />
+			<lib file="${lib}/commons-collections-3.2.1.jar" />
+			<lib file="${lib}/commons-lang-2.4.jar" />
+			<lib file="${lib}/commons-codec-1.4.jar" />	
+			<lib file="${lib}/auth-dao-1.0.0.jar" />
+			<lib file="${lib}/auth-model-1.0.0.jar" />
+			<metainf dir="${build}/webauth/META-INF" />
+		</war>
+	</target>
+
+</project>
+
+<!-- ${DSTAMP} rappresenta la data corrente -->
+
+
+
+

@@ -1,0 +1,131 @@
+swagger: "2.0"
+info:
+  title: API authdbservice
+  version: "1.0"
+host: api.server.test
+basePath: /dbauth
+schemes:
+  - https
+paths:
+  /userlist:
+  #Elenco utenti
+    get:
+      # Query parameters
+      parameters:
+      - name: namefilter
+        in: query
+        required: false
+        type: string
+      responses:
+        '200':
+          description: OK
+          content:  # Response body
+             application/json:  # Media type
+  /users/{id}:
+  #Ottenere un utente
+    get:
+     # Query parameters
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          content:  # Response body
+             application/json:  # Media type
+  /usersbyname/{username}:
+    get:
+    # Query parameters
+      parameters:
+      - name: username
+        in: path
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          content:  # Response body
+             application/json:  # Media type
+  /authentication/{user}/{password}:
+    get:
+     # Query parameters
+      parameters:
+      - name: user
+        in: path
+        required: true
+        type: string
+      - name: password
+        in: path
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          content:  # Response body
+             application/json:  # Media type
+  /functionflags/{function}/{userId}:
+    get:
+     # Query parameters
+      parameters:
+      - name: function
+        in: path
+        required: true
+        type: string
+      - name: userId
+        in: path
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          content:  # Response body
+             application/json:  # Media type
+  /domainfunctionflags/{function}/{userName}:
+    get:
+    # Query parameters
+      parameters:
+      - name: function
+        in: path
+        required: true
+        type: string
+      - name: userName
+        in: path
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          content:  # Response body
+             application/json:  # Media type
+  /domainacls/{objectTypeId}:
+    get:
+     # Query parameters
+      parameters:
+      - name: objectTypeId
+        in: path
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          content:  # Response body
+             application/json:  # Media type
+  /domainacls/{objectTypeId}/{domainId}:
+    get:
+    # Query parameters
+      parameters:
+      - name: objectTypeId
+        in: path
+        required: true
+        type: string
+      - name: domainId
+        in: path
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          content:  # Response body
+             application/json:  # Media type

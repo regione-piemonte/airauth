@@ -1,0 +1,82 @@
+<script language="JavaScript">
+    #if ( !$ambito.idAmbito )
+        function checkData(formObj)
+        {
+        var domain = (formObj.newdomain.value).trim();
+        if((domain == null)||(domain.length==0))
+        {
+        window.alert("Specificare il nome dell'ambito");
+        return false; 
+        }
+        return true;
+        }
+    #end
+    function textCounter(field, maxlimit) 
+    {
+    if (field.value.length > maxlimit) 
+    field.value = field.value.substring(0, maxlimit);
+    }
+</script>
+
+#if(!$ambito.idAmbito)
+    <h2>Nuovo ambito</h2>
+    <div class="contenuti">
+        <form action="$action" method="post" onSubmit="javascript:return checkData(this);">
+            <table>
+                <tr>
+                    <th>
+                        <label>Nome ambito:</label>
+                    </th>
+                    <td colspan="2">
+                        <input class="inputField" name="newdomain"
+                            type="text" value="" size="32" maxlength="32" />&nbsp;
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <th>
+                        <label>Descrizione:</label>
+                    </th>
+                    <td><textarea name="descrizione" rows="2" cols="64"
+                            onKeyDown="textCounter(this.form.descrizione,128);"
+                            onKeyUp="textCounter(this.form.descrizione,128);"
+                            wrap="on"></textarea>
+                            <br/>
+                            <note>(max. 128 caratteri)</note>
+                    </td>
+                </tr>
+				<tr>
+					<td><input class="tasto" type="submit" value="Salva ambito" /> 							
+					</td>
+				</tr>	
+            </table>
+        </form>
+    </div>
+#else
+    <h2>Modifica ambito #if($ambito.ambito) $ambito.ambito #end</h2>
+    <div class="contenuti">
+        <form action="$action" method="post">
+            <input name="updatedomain" type="hidden" value="$ambito.idAmbito" />
+            <table>
+                <tr>
+                    <th>
+                        <label>Descrizione:</label>
+                    </th>
+                    <td>
+                        <textarea name="descrizione" rows="2" cols="64"
+                            onKeyDown="textCounter(this.form.descrizione,128);"
+                            onKeyUp="textCounter(this.form.descrizione,128);"
+                            wrap="on">#if($ambito.descrizione)$ambito.descrizione#end</textarea>
+                        <br/>
+                        <note>(max. 128 caratteri)</note>
+                    </td>
+                </tr>
+				<tr>
+					<td><input class="tasto" type="submit" value="Salva ambito" /> 							
+					</td>
+				</tr>
+            </table>
+		</form>
+	</div>
+#end
+<br/>
+#parse( "webauth/navBar.vm" )

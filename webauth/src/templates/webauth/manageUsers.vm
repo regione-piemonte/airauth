@@ -1,0 +1,139 @@
+<script language="JavaScript">
+
+	function calendarCallback(day, month, year)
+    {
+      date = day + '/' + month + '/' + year;
+      document.forms["expired"].date_expired.value = date;
+    }
+    
+    function checkUserforDelete()
+    {
+    	var status=window.confirm("Sei sicuro di voler cancellare l'utente selezionato?");
+		return status;
+    }
+    	
+</script>
+
+
+<h2>Gestione Utenti</h2>
+<div class="contenuti">
+  <div class="box">
+    <table>
+        <tr>
+    	  <td>
+    		<form action="$action" method="get">
+    		<input name="edituser" type="hidden" value="" />						
+			<input value="Aggiungi un nuovo utente" class="addnewUser"
+    				type="submit" />						   				
+    		</form>
+		  </td>
+    	</tr>   
+    		<!-- account expired -->
+   	<form action="$action" method="get" name="expired">
+		<tr>
+    	  <td>
+
+    		<input name="search_expired" type="hidden" value="" />						
+            	<fieldset>
+            	<legend>Visualizza gli utenti scaduti al (gg/mm/aaaa):</legend>
+            	<input name="date_expired" type="text" #if( $expiryDate ) value="$expiryDate" #end/>
+				 <script language="JavaScript" type="text/javascript">
+            	 	<!--
+            		objCalendar = new Calendar('objCalendar', 'calendarCallback');
+            		//-->
+		    		</script>				
+				<p>$message</p>
+            	</fieldset>					
+     	 </td>
+		 <td class="mini">
+		 <input title="Ricerca gli account scaduti" type="submit"
+    					class="expireduser" />
+		 </td>		
+       </tr>  
+	</form>		 
+    		<!-- search account -->
+  	<form action="$action" method="get">
+     <tr>
+    	<td>				
+				<fieldset>
+    				<legend>Nome utente (*)</legend>
+    				<input name="findusers" type="text" value=""
+    					maxlength="32"	class="inputField"/>
+    				<note>(*)&Egrave; anche possibile specificare 
+    						soltanto una parte del nome.</note>				
+    			</fieldset>    					
+ 					
+  	     </td>
+		 <td class="mini">
+			<input title="Ricerca un nome utente" type="submit"
+    					class="searchuser" />
+		 </td>			
+     </tr>
+   	</form>			 
+    	<!-- sezione gruppi -->
+    	<form action="$action" method="get">
+    			<input name="view_group" type="hidden" value="" />
+    			<tr>
+    				<td>
+    					<fieldset>
+    						<legend>Gruppo</legend>
+    						<select	name="select_group">
+    							#foreach( $gruppo in $list_groups )
+    								<option value="$gruppo.idGruppo">&middot;
+    									$gruppo.gruppo &nbsp;&nbsp;&nbsp; $gruppo.descrizione
+                                    </option>
+    							#end
+    						</select>					
+    					</fieldset>
+    				</td> 
+					<td class="mini">
+							<input type="submit" class="searchuser" 
+								title="Ricerca gli utenti di un gruppo" />
+                    </td>
+    			</tr>
+    		</form>
+    	</table>
+	</div>
+
+	<!-- Elenco degli utenti trovati -->
+	#if( !$users.isEmpty() )
+		<table class="report">
+			<tr>  
+				<th>Nome completo</th>
+				<th>Username</th>
+				<th>Azienda</th>
+			    <th>Data scadenza</th>					
+				<th>Modifica</th>
+				<th>Cancella</th>
+			</tr>
+    		#set ($count = 0)
+    		#foreach( $utente in $users )
+                <tr>			
+    				<td>#if( $utente.cognome ) $utente.cognome #end
+    						#if ( $utente.nome ) $utente.nome #end
+    				</td>
+    				<td>$utente.utente</td>
+    				<td>#if( $utente.azienda ) $utente.azienda #end</td>
+					<td>#if ($utente.dataScadenza) $utente.dataScadenza #end</td>
+    				<td>
+                		<form name="update" method="get" action="$action">
+        					<input name="edituser" type="hidden" value="$utente.idUtente" />						
+        					<input class="inputImage" name="modifica" type="image"
+                						src="css/images/updateuser.png" alt="Modifica" title="Modifica" />						
+                    	</form>
+    				</td>
+    				<td>
+    					<form name="delete" method="post" action=""
+    						onSubmit="javascript:return checkUserforDelete(this);">
+							<input name="deleteuser" type="hidden" value="$utente.idUtente" />
+    						<input class="inputImage" name="cancella" type="image"
+    							src="css/images/deleteuser.png" alt="Cancella" title="Cancella" />
+    					</form>
+    				</td>
+            	</tr>
+    			#set( $count = $count + 1 )	
+    		#end
+		</table>		
+	#end
+	#parse( "webauth/navBar.vm" )
+</div>

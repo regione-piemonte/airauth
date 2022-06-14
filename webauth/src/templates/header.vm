@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+<title>ARIAWEB - Gestione utenti</title>
+<meta name="author" content="CSI-Piemonte" />
+<link type="text/css" href="css/ariaweb.css" rel="stylesheet" media="screen" />
+<link type="text/css" href="css/calendar/css/Calendar.css" rel="stylesheet" media="screen" />
+<script src="css/calendar/js/browserSniffer.js"></script>
+<script src="css/calendar/js/Calendar.js"></script>
+<script src="css/js/string.js"></script>
+</head>
+<body>
+<div id="pagina">
+  <div id="contTitoloEmenu">
+    <div id="titoloEmenu"><h1><span class="txtHidden nascosto">ARIAWEB - Gestione utenti</span></h1></div>
+  </div>
+  <hr />
+  <div id="contenitore">
+    <div id="corpo">
+      <div id="sfondo">
+        <div id="colonna">

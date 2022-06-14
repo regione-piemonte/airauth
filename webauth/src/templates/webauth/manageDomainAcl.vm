@@ -1,0 +1,54 @@
+<script language="JavaScript">
+
+function checkDomainAclforDelete()
+{
+	return window.confirm("Sei sicuro di voler cancellare l\'associazione selezionata?");
+}
+
+</script>
+
+<h2>Gestione degli oggetti da associare agli ambiti</h2>
+<div class="contenuti">
+		<form action="$action" method="get">
+			<input name="editdomainacl" type="hidden" value="" />
+			<table>
+    			<tr>
+    				<td>
+						<input value="Aggiungi una nuova associazione" class="addnewAcl"
+    						type="submit" />   					
+    				</td>
+    			</tr>
+			</table>
+		</form>	
+	<br/>
+
+	#if ( !$list_domain_acl.isEmpty() )
+		<h3>Elenco degli oggetti associati agli ambiti</h3>	
+		<table class="report">			
+			<tr>
+				<th>Ambito</th>
+				<th>Tipo oggetto</th>
+				<th>Nome oggetto</th>
+				<th>Cancella</th>
+			</tr>
+			#set ($count = 0)
+			#foreach( $ambito_acl in $list_domain_acl )
+    			<tr>	
+    				<td>$ambito_acl.domain</td>
+    				<td>$ambito_acl.objType</td>						
+					<td>$ambito_acl.objName</td>
+    				<form name="delete" method="post" action="$action"
+    					onSubmit="javascript:return checkDomainAclforDelete(this);">
+    					<input name="deletedomainacl" type="hidden" value="$ambito_acl.ambitoAclKey" />
+    					<td>
+    						<input type="submit" title="Cancella associazione" id="btn-img-delete" />
+    					</td>
+    				</form>									
+    			</tr>
+				#set( $count = $count + 1 )
+			#end
+		</table>
+		<br/>
+	#end
+	#parse( "webauth/navBar.vm" )
+</div>

@@ -1,0 +1,79 @@
+publiccodeYmlVersion: "0.2"
+name: Airauth
+applicationSuite: SRRQA - Rilevamento della Qualità dell'Aria
+url: "https://github.com/regione-piemonte/airauth"
+softwareVersion: "1.0.0" 
+releaseDate: "2022-06-14"
+inputTypes:
+  - text/plain
+outputTypes:
+  - text/plain
+  - multipart/form-data
+platforms:
+  - linux
+  - windows
+categories: 
+  - accounting
+  - contact-management
+usedBy:
+  - ARPA Piemonte
+  - Region Piemonte
+developmentStatus: stable 
+softwareType: "standalone/web" 
+intendedAudience:
+  scope:
+    - environment
+  countries:
+    - it
+description: 
+  it: 
+    localisedName: Airauth
+    genericName: Airauth
+    shortDescription: > 
+          Prodotto destinato alla gestione degli utenti che possono accedere
+          alla suite di prodotti del SRRQA.
+    longDescription: > 
+          L'applicazione è utilizzata per configurare gli utenti che possono 
+          accedere alla suite di prodotti del Sistema Regionale di Rilevamanto 
+          della Qualità dell'Aria.Consente di profilare gli utenti definendo 
+          gruppi, funzioni e ambiti. Inoltre per ciscuna funzione è possibile 
+          definire permessi specifici di lettura e scrittura o di funzioni 
+          avanzate. Fornisce uno strumento avanzato per definire le 
+          caratteristiche degli utenti e i permessi che possono avere a 
+          seconda degli applicativi a cui desiderano fare accesso.
+    features:
+       - gestione utenti
+       - gestione gruppi
+       - gestione ambiti
+       - gestione associazioni
+    screenshots:
+       - screenshoots/1_principale.png
+       - screenshoots/2_gestione_utenti.png
+       - screenshoots/3_gestione_gruppi.png
+       - screenshoots/4_gestione_ambiti.png
+       - screenshoots/5_gestione_associazioni.png
+legal:
+  license: EUPL-1.2
+  mainCopyrightOwner: Regione Piemonte
+  repoOwner: Regione Piemonte
+  authorsFile: Copyrights.txt
+maintenance:
+  type: "internal"
+  contacts: 
+    - name: Flavio Bianchi
+      email: "flavio.bianchi@csi.it"
+      affiliation: CSI Piemonte
+      phone: ""
+localisation:
+  localisationReady: false
+  availableLanguages:
+    - it
+it: 
+  countryExtensionVersion: "0.2"
+  piattaforme:
+    spid: false
+    cie: false
+    anpr: false
+    pagopa: false
+  riuso: 
+    codiceIPA: r_piemon

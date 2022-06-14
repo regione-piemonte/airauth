@@ -1,0 +1,73 @@
+.Calendar_header{
+	background-color: #eeeeee;
+      color: #1a578e;
+	border-width: 0px;
+      border-style:solid;
+      border-color:#0000ff;
+	font-family: Arial, Verdana, Helvetica, Sans-Serif;
+	font-size: 10pt;
+	font-weight: bold;
+      font-style: normal;
+	text-align:center;
+      text-decoration:none;
+}
+.Calendar_dayname {
+	background-color: #eeeeee;
+    	color: #1a578e;
+	border-width:0px;
+      border-style:solid; 
+      border-color:#1a578e;
+	font-family: Arial, Verdana, Helvetica, Sans-Serif;
+	font-size: 8pt;
+      font-style: normal;
+      font-weight:bold;
+	text-align: center;
+      text-decoration:none;
+}
+.Calendar_today a, .Calendar_today a:link {
+    	color: #000;
+}
+.Calendar_day{
+	background-color: #eeeeee;
+	font-family: Arial, Verdana, Helvetica, Sans-Serif;
+	font-size: 8pt;
+    	font-style: normal;
+}
+
+A:link{
+	color: #0d416f;
+      text-decoration:none;
+}
+A:visited {
+	color: #0d416f;
+      text-decoration:none;
+}
+A:hover {
+      color: #900;
+	font-weight: bold;
+}
+
+.Calendar_today{
+	background-color: #a7c3df;
+	border-width: 1px;
+      border-style: dashed;
+      border-color: #0d416f;
+      padding-left:3px;
+      padding-right:3px;
+	font-family: Arial, Verdana, Helvetica, Sans-Serif;
+	font-size: 10pt;
+      font-weight: bold;
+      text-decoration:none;
+      color:#000;
+ }
+
+.Calendar {
+	background-color: #c0c0c0;
+	border-width: 2px;
+	border-style: outset;
+	border-color: white;
+	visibility: hidden;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+}

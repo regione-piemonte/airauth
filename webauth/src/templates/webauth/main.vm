@@ -1,0 +1,12 @@
+<div class="contenuti">
+	<div class="box">
+        <h2><a href="$users"><img src="css/images/user.png" />
+        		Gestione utenti</a></h2>
+	    <h2><a href="$groups"><img	src="css/images/group.png" />
+        		Gestione gruppi</a></h2>
+        <h2><a href="$domains"><img src="css/images/domain.png" />
+        		Gestione ambiti</a></h2>
+		<h2><a href="$domainacl"><img src="css/images/acl.png" />
+        		Gestione associazioni</a></h2>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="pulsanti">
+	#if($home)
+		<a href="$home" class="tastoNav">Home gestione utenti</a>        		
+	#end
+	#if($upTarget)
+		<a href="$upTarget" class="tastoNav">Torna a livello superiore</a>       		
+	#end
+</div>

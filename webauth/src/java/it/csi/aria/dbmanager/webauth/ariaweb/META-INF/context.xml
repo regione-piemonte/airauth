@@ -1,0 +1,9 @@
+<Context debug="0" reloadable="false" crossContext="false">
+    <Resource name="dbAuth" auth="Container" type="javax.sql.DataSource"
+		driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://127.0.0.1:5432/dbauth2-test" username="dbauth_user"
+		password="user_dbauth" maxActive="10" maxIdle="1" maxWait="20000"
+		removeAbandoned="true" removeAbandonedTimeout="60" />
+		
+		<Parameter name="dataSourceAuth" value="dbAuth" override="false" />
+</Context>

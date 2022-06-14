@@ -1,0 +1,5 @@
+<h2>#if($result) Informazione #else Errore #end</h2>
+ <div class="contenuti">
+	#if($message) <div class="messaggio">$message</div> #end
+	#parse("webauth/navBar.vm")
+</div>

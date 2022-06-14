@@ -1,0 +1,72 @@
+<script language="JavaScript">
+    function checkData(formObj)
+    {
+        var domain = (formObj.id_ambito.value).trim();
+        if((domain == null)||(domain.length==0))
+        {
+       	    window.alert("Specificare il nome dell\'ambito");
+            return false; 
+        }
+		var objType = (formObj.tipo_oggetto.value).trim();
+        if((objType == null)||(objType.length==0))
+        {
+       	    window.alert("Specificare il tipo oggetto");
+            return false; 
+        }
+		var objId = (formObj.id_oggetto.value).trim();
+        if((objId == null)||(objId.length==0))
+        {
+       	    window.alert("Specificare l\'oggetto");
+            return false; 
+        }
+        return true;
+    }
+   
+</script>
+
+<h2>Nuova associazione</h2>
+<div class="contenuti">
+    <form action="$action" name="newdomainacl" method="post" onSubmit="javascript:return checkData(this);">
+        <table>
+            <tr>
+                <th>Nome ambito:</th>
+                <td>
+                    <select name="id_ambito" size="1" class="fixedWidth">
+						<option selected></option>
+						#foreach( $domain in $domainList )
+							<option value="$domain.idAmbito">
+								$domain.descrizione
+							</option>
+						#end
+					</select>
+                </td>
+			</tr>
+			<tr>
+				<th>Tipo oggetto:</th>
+				<td>
+                    <select name="tipo_oggetto" size="1" class="fixedWidth">
+						<option selected></option>
+						#foreach( $objType in $objTypeList )
+							<option value="$objType.getIdTipoOggetto()">
+								$objType.getDescrizione()
+							</option>
+						#end
+					</select>
+                </td>
+			</tr>
+			<tr>
+				<th>Valore oggetto:</th>
+				<td>
+					<input type="text" name="id_oggetto" size="32" maxlength="32"/>
+				</td>
+            </tr>
+            <tr>
+				<td><input type="submit" name="newdomainacl" value="Salva associazione" class="tasto" /> 							
+				</td>
+			</tr>	
+        </table>
+    </form>
+</div>
+
+<br/>
+#parse( "webauth/navBar.vm" )

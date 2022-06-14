@@ -1,0 +1,73 @@
+<script language="JavaScript">
+
+function checkGroupforDelete()
+{
+   return window.confirm("Sei sicuro di voler cancellare il gruppo selezionato ?");
+}
+
+</script>
+
+
+<h2>Gestione Gruppi</h2>
+<div class="contenuti">
+		<form action="$action" method="get">
+			<input name="editgroup" type="hidden" value="" />
+			<table>
+				<tr>
+					<td>
+						<input value="Aggiungi un nuovo gruppo" class="addnewGroup"
+    						type="submit" />					
+					</td>
+				</tr>
+			</table>
+		</form>
+	<!-- Elenco dei gruppi trovati -->
+	#if (!$list_groups.isEmpty())
+		<h3>Seleziona gruppo</h3>	
+		<table class="report">			
+			<tr>
+				<th>Gruppo</th>
+				<th>Descrizione</th>
+                <th>Componenti</th>
+                <th>Modifica</th>				
+                <th>Cancella</th>
+			</tr>
+			#set ($count = 0)
+			#foreach( $gruppo in $list_groups )
+				<tr>
+					<td>$gruppo.gruppo </td>
+					<td>#if($gruppo.descrizione) $gruppo.descrizione #end</td>												
+					<form name="list_user_group" method="get" action="$action" >
+						<td>
+							<input name="listgroup" type="hidden"
+								value="$gruppo.idGruppo" />
+							<input title="Mostra i componenti del gruppo"
+								class="inputImage" type="image"
+								src="css/images/group_list.png"
+								alt="Mostra gli utenti del gruppo" />
+						</td>
+					</form>
+					<form name="update" method="get" action="$action">
+						<input name="editgroup" type="hidden" value="$gruppo.idGruppo" />
+						<td>
+							<input title="Modifica gruppo" class="inputImage"
+								type="image" src="css/images/updategroup.png"
+								alt="Modifica gruppo" title="Modifica gruppo" />
+						</td>
+					</form>
+					<form name="delete" method="post" action="$action"
+						onSubmit="javascript:return checkGroupforDelete(this);">
+						<input name="deletegroup" type="hidden" value="$gruppo.idGruppo" />
+						<td>
+							<input title="Cancella gruppo" class="inputImage"
+								type="image" src="css/images/deletegroup.png"
+								alt="Cancella" title="Cancella" />
+						</td>
+					</form>						
+				</tr>
+				#set( $count = $count + 1 )
+			#end
+		</table>
+	#end
+	#parse( "webauth/navBar.vm" )
+</div>

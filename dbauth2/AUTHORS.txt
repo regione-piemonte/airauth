@@ -1,0 +1,4 @@
+# This is the list of AIRSTATION authors for copyright purposes.
+Marco Rossino
+Pierfrancesco Vallosio (MCE - Manutenzione e costruzioni elettroniche)
+Isabella Vespa (CSI Piemonte)

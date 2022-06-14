@@ -1,0 +1,270 @@
+<script language="JavaScript">
+
+#if (!$gruppo.idGruppo)
+ function checkData(formObj)
+ {
+   var group = (formObj.newgroup.value).trim();
+   if((group == null)||(group.length==0))
+   {
+     window.alert("Specificare il nome del gruppo!");
+     return false; 
+   }
+   return true;
+ }
+#end
+
+function checkFunctionDelete()
+{
+     var status = window.confirm("Sei sicuro di voler cancellare la funzione?");
+	 return status;
+}	
+
+function changeWritePermission(permission)
+{
+  document.forms["update"].scrittura.value = permission;
+}
+
+function changeAdvPermission(permission)
+{
+  document.forms["update"].avanzata.value = permission;
+}
+
+function isNewFunction(formObj)
+{
+
+  var selFun = formObj.funzione.options[formObj.funzione.selectedIndex].value;
+  var selAmb = formObj.ambito.options[formObj.ambito.selectedIndex].value;
+	
+  var maxIndex = document.forms.length - 4 ;
+
+  var found = false
+  for (i=0 ; i<maxIndex && found==false; i++)
+  {
+    var name = "func"+i;
+    var f = document.forms[name].funzione.value;
+    var a = document.forms[name].ambito.value;
+		
+    if((selFun == f)&&(selAmb == a))
+      found = true;
+  }
+
+  if (found == true)
+  {
+    window.alert("La funzione e' gia' presente");
+    return false;
+  }
+	
+  return true;
+}
+
+function textCounter(field, maxlimit) 
+{
+  if (field.value.length > maxlimit) 
+    field.value = field.value.substring(0, maxlimit);
+}
+</script>
+
+#if(!$gruppo.idGruppo)
+<h2>Nuovo gruppo</h2>
+    <div class="contenuti">
+            <form action="$action" method="post"
+				onSubmit="javascript:return checkData(this);">
+                <table>
+                    <tr>
+                        <th>
+							<label class="evid">Nome gruppo:</label>
+						</th>
+						<td colspan="2">
+							<input class="inputField" name="newgroup"
+								type="text" value="" size="32" maxlength="32" />
+						</td>
+                    </tr>
+                    <tr>
+						<th>
+							<label>Descrizione:</label>
+						</th>
+                        <td>
+                            <textarea name="descrizione" rows="2" cols="64"
+        						onKeyDown="textCounter(this.form.descrizione,128);"
+        						onKeyUp="textCounter(this.form.descrizione,128);"
+        						wrap="on"></textarea> 
+                            <br/>
+                            <note>(max. 128 caratteri)</note>
+                        </td>
+                    </tr>
+					<tr>
+						<td><input class="tasto" type="submit" value="Salva gruppo" /> 							
+						</td>
+					</tr>	
+				</table>
+            </form>
+    </div>
+#else
+<h2>Modifica gruppo #if($gruppo.gruppo) $gruppo.gruppo #end</h2>
+<div class="contenuti">
+	<div class="box">
+		<form action="$action" method="post">
+			<input name="updategroup" type="hidden" value="$gruppo.idGruppo" />
+    		<table>
+    			<tr>
+    				<td><label class="evid">Descrizione:</label></td>
+    				<td>
+    					<textarea name="descrizione" rows="2" cols="64"
+    						onKeyDown="textCounter(this.form.descrizione,128);"
+    						onKeyUp="textCounter(this.form.descrizione,128);"
+    						wrap="on">#if($gruppo.descrizione)$gruppo.descrizione#end</textarea>
+    					<br/>
+    					<note>(max. 128 caratteri)</note>
+    				</td>
+    				<td>
+    					<input class="tasto" type="submit" value="Salva" />
+    				</td>
+    			</tr>
+    		</table>
+		</form>
+    </div>
+	<br/>
+	<table class="report">
+		<tr>
+			<th rowspan="2">Funzione</th>
+			<th rowspan="2">Ambito</th>
+			<th colspan="2">Scrittura</th>
+			<th colspan="2">Avanzata</th>
+			<td rowspan="2" class="noBck"></td>
+		</tr>
+		<tr>
+			<th>Si</th>
+			<th>No</th>
+			<th>Si</th>
+			<th>No</th>
+		</tr>
+		<form action="$action" method="post" rowspan="2"
+			onSubmit='javascript:return isNewFunction(this);'>
+			<input type="hidden" name="addfunction" value="" />
+			<input type="hidden" name="group_id" value="$gruppo.idGruppo" />
+			<tr>
+				<td>
+					<select name="funzione">
+						#foreach( $fn in $list_functions )
+							<option value="$fn.idFunzione">
+								#if($fn.funzione) $fn.funzione #end
+							</option>
+						#end
+					</select>
+				</td>
+				<td>
+					<select multiple size="8"name="ambito">
+						#foreach( $ambito in $list_domains )
+							<option value="$ambito.idAmbito">
+								#if($ambito.ambito) $ambito.ambito #end
+							</option><br/>
+						#end
+						<option value="-1"></option>
+					</select>
+				</td>
+				<td>
+					<input type="radio" name="scrittura" value="true" />
+				</td>
+				<td>
+					<input type="radio" name="scrittura" value="false" checked />
+				</td>
+				<td>
+					<input type="radio" name="avanzata" value="true" />
+				</td>
+				<td>
+					<input type="radio" name="avanzata" value="false" checked />
+				</td>
+				<td class="noBck">
+					<input class="tasto" type="submit" value="Aggiungi" />
+				</td>
+			</tr>
+		</form>
+	</table>
+	#if (!$list_grfuns.isEmpty())
+	<table class="report">
+		<tr>
+			<th rowspan="2">Funzione</th>
+			<th rowspan="2">Ambito</th>
+			<th colspan="2">Scrittura</th>
+			<th colspan="2">Avanzata</th>
+			<th class="mini" rowspan="2" colspan="2"></th>
+			<br/>
+		</tr>
+		<tr>
+			<th>Si</th>
+			<th>No</th>
+			<th>Si</th>
+			<th>No</th>
+		</tr>
+		#set ($count = 0)
+		#foreach( $fg in $list_grfuns )
+    		<tr>
+    			<td> 
+    				$WAUtil.getFunzione($list_functions, $fg.idFunzione).funzione
+    			</td>
+    			<form name="update" action="$action" method="post">
+        			<input name="updatefunction" type="hidden" value=""/>
+        			<input name="group_id" type="hidden" value="$gruppo.idGruppo"/>
+        			<input name="funzione" type="hidden" value="$fg.idFunzione"/>
+        			<input name="ambito" type="hidden" value="$fg.idAmbito" />
+        			<br/>
+    			<td>
+    				<select multiple size="8" name="ambito_selected">
+						#foreach( $ambito in $list_domains )
+							<option value="$ambito.idAmbito" 
+							#set ($list_selected_ambiti = $mapFunzGrupAmbiti.get($fg.idFunzione))
+							#foreach( $ambito_selected in  $list_selected_ambiti)
+								#if($ambito.idAmbito == $ambito_selected.idAmbito)
+									SELECTED
+								#end
+							#end
+							> 
+							$ambito.ambito	
+							</option><br/>
+						#end
+							<option value="-1"></option>
+					</select>
+    			</td>
+        			<td>
+        				<input type="radio" name="scrittura" value="true"
+        					#if($fg.fnScrittura) checked #else "" #end
+        					onClick='changeWritePermission(true)' />
+        			</td>
+        			<td>
+        				<input type="radio"	name="scrittura" value="false"
+        					#if($fg.fnScrittura) "" #else checked #end
+        					onClick='changeWritePermission(false)' />
+        			</td>
+        			<td>
+        				<input type="radio"	name="avanzata" value="true"
+        					#if($fg.fnAvanzata) checked #else "" #end
+        					onClick='changeAdvPermission(true)' />
+        			</td>
+        			<td>
+        				<input type="radio" name="avanzata" value="false"
+        					#if($fg.fnAvanzata) "" #else checked #end
+        					onClick='changeAdvPermission(false)' />
+        			</td>
+        			<td class="mini">
+        				<input class="inputImage" type="image" src="css/images/update.png"
+        					border="0" alt="Aggiorna" title="Aggiorna" />
+        			</td>
+    			</form>
+    			<form name="delete" action="$action" method="post"
+    				onSubmit="javascript:return checkFunctionDelete(this);">
+        			<input name="deletefunction" type="hidden" value=""/>
+        			<input name="group_id" type="hidden" value="$gruppo.idGruppo"/>
+        			<input name="funzione" type="hidden" value="$fg.idFunzione"/>
+        			<td class="mini">
+        				<input class="inputImage" type="image" src="css/images/delete.png"
+    						border="0" alt="Elimina" title="Elimina" />
+        			</td>
+    			</form>
+    		</tr>
+    		#set( $count = $count + 1 )
+		#end
+	</table>
+	#end
+</div>
+#end
+#parse( "webauth/navBar.vm" )

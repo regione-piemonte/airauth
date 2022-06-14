@@ -1,0 +1,59 @@
+<!-- Title:  Build and release procedures for Auth service project -->
+<!-- Author: pierfrancesco.vallosio@consulenti.csi.it -->
+<!-- Date:   12-October-2015 -->
+<!-- $Id: build.xml,v 1.2 2015/10/12 17:23:47 pfvallosio Exp $ -->
+
+<project name="authservice" default="all" basedir=".">
+
+	<description>
+    	Build and release procedures for AQD project
+	</description>
+
+	<!-- Global properties -->
+	
+	<property name="src" location="./src/java" />
+	<property name="lib" location="./lib" />
+	<property name="cfg" location="./conf" />
+	<property name="build" location="./build" />
+	<property name="dist" location="./dist" />
+	<property file="buildfiles/build.properties" />
+	<property file="buildfiles/${target}.properties" />
+	<target name="all" depends="dist-service" description="Build all the project">
+	</target>
+
+	<target name="init">
+		<!-- Timestamp generation -->
+		<tstamp />
+	</target>
+
+	<target name="clean" description="Delete generated files and folders">
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+	</target>
+
+	<target name="compile-service" depends="init" description="Compile Auth Web Service">
+		<mkdir dir="${build}/classes/authservice" />
+		<javac srcdir="${src}" destdir="${build}/classes/authservice" classpath="${lib}/log4j-1.2.16.jar:${lib}/servlet-api-2.5.jar:${lib}/javax.ws.rs-api-2.0.jar:${lib}/auth-model-1.0.0.jar:${lib}/auth-dao-1.0.0.jar" includeantruntime="false" debug="on">
+			<include name="it/csi/webauth/service/**" />
+		</javac>
+	</target>
+
+	<target name="dist-service" depends="compile-service" description="Generate Auth Web Service archive">
+		<mkdir dir="${dist}/bin" />
+		<mkdir dir="${build}/authservice/META-INF" />
+		<copy file="${cfg}/servlet/META-INF/context.xml" todir="${build}/authservice/META-INF"/>
+		<replace file="${build}/authservice/META-INF/context.xml" token="@@@@DBAUTH_HOST@@@@" value="${dbauth_host}" />
+		<replace file="${build}/authservice/META-INF/context.xml" token="@@@@DBAUTH_PORT@@@@" value="${dbauth_port}" />
+		<replace file="${build}/authservice/META-INF/context.xml" token="@@@@DBAUTH@@@@" value="${dbauth}" />
+		<replace file="${build}/authservice/META-INF/context.xml" token="@@@@DBAUTH_USER@@@@" value="${dbauth_user}" />
+		<replace file="${build}/authservice/META-INF/context.xml" token="@@@@DBAUTH_PWD@@@@" value="${dbauth_pwd}" />
+		<war destfile="${dist}/bin/authdbservice.war" webxml="${cfg}/servlet/web.xml">
+			<lib dir="${lib}">
+			</lib>
+			<metainf dir="${build}/authservice/META-INF" />
+			<classes dir="${build}/classes/authservice" />
+			<classes file="${cfg}/servlet/log4j.properties" />
+		</war>
+	</target>
+
+</project>

@@ -1,0 +1,60 @@
+<script language="JavaScript">
+
+function checkDomainforDelete()
+{
+	return window.confirm("Sei sicuro di voler cancellare l'ambito selezionato?");
+}
+
+</script>
+
+<h2>Gestione Ambiti</h2>
+<div class="contenuti">
+		<form action="$action" method="get">
+			<input name="editdomain" type="hidden" value="" />
+			<table>
+    			<tr>
+    				<td>
+						<input value="Aggiungi un nuovo ambito" class="addnewDomain"
+    						type="submit" />   					
+    				</td>
+    			</tr>
+			</table>
+		</form>	
+	<br/>
+
+	<!-- Elenco degli ambiti trovati -->
+	#if ( !$list_domains.isEmpty() )
+		<h3>Seleziona ambito</h3>	
+		<table class="report">			
+			<tr>
+				<th>Ambito</th>
+				<th>Descrizione</th>
+				<th>Modifica</th>
+                <th>Cancella</th>
+			</tr>
+			#set ($count = 0)
+			#foreach( $ambito in $list_domains )
+    			<tr>	
+    				<td>$ambito.ambito</td>
+    				<td>#if($ambito.descrizione) $ambito.descrizione #end &nbsp;</td>						
+    				<form name="update" method="get" action="$action">
+    					<input name="editdomain" type="hidden" value="$ambito.idAmbito" />
+    					<td>
+        					<input type="submit" title="Modifica" id="updateDomain" />
+    					</td>
+    				</form>
+    				<form name="delete" method="post" action="$action"
+    					onSubmit="javascript:return checkDomainforDelete(this);">
+    					<input name="deletedomain" type="hidden" value="$ambito.idAmbito" />
+    					<td>
+    						<input type="submit" title="Cancella ambito" id="deleteDomain" />
+    					</td>
+    				</form>									
+    			</tr>
+				#set( $count = $count + 1 )
+			#end
+		</table>
+		<br/>
+	#end
+	#parse( "webauth/navBar.vm" )
+</div>

@@ -1,0 +1,5 @@
+<h2>$title</h2>
+<div class="messaggio"><p>$message</p></div>
+#if ( $redirectTarget && $redirectMessage )
+	<div class="pulsanti"><a href="$redirectTarget" class="tasto">$redirectMessage</a></div>
+#end	

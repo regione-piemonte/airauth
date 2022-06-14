@@ -1,0 +1,75 @@
+<!-- Title:  Build and release procedures for Webauth project -->
+<!-- Author: pierfrancesco.vallosio@consulenti.csi.it -->
+<!-- Date:   15-November-2010 -->
+<!-- $Id: build.xml,v 1.6 2015/10/12 17:22:58 pfvallosio Exp $ -->
+
+<project name="webauth" default="all" basedir="." >
+
+	<description>
+    	Build and release procedures for authdbmanager
+	</description>
+
+	<!-- Global properties -->
+	<property name="modelver" value="${version}" />
+	<property name="daover" value="${version}" />
+	<property name="src" location="./src/java" />
+	<property name="lib" location="./lib" />
+	<property name="build" location="./build" />
+	<property name="dist" location="./dist" />
+		
+	<target name="all" depends="dist-authdbmanager" description="Build all the project">
+	</target>
+
+	<target name="init">
+		<!-- Timestamp generation -->
+		<tstamp />
+	</target>
+
+	<target name="clean" description="Delete generated files and folders">
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+		
+	</target>
+
+	<target name="compile-auth-model" depends="init" description="Compile authentication db interface">
+		<mkdir dir="${build}/auth-db/model" />
+		<javac srcdir="${src}" destdir="${build}/auth-db/model" classpath="" sourcepath="" includeantruntime="false" debug="on">
+			<include name="it/csi/webauth/db/model/**" />
+		</javac>
+	</target>
+
+	<target name="dist-auth-model" depends="compile-auth-model" description="Generate the authentication db interface archive">
+		<mkdir dir="${dist}/auth-db" />
+		<jar jarfile="${dist}/auth-db/auth-model-${modelver}.jar" basedir="${build}/auth-db/model">
+			<manifest>
+				<attribute name="Built-By" value="CSI" />
+				<attribute name="Implementation-Vendor" value="CSI" />
+				<attribute name="Implementation-Title" value="Auth DB model" />
+				<attribute name="Implementation-Version" value="${modelver}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="compile-auth-dao" depends="dist-auth-model" description="Compile authentication db interface">
+		<mkdir dir="${build}/auth-db/dao" />
+		<javac srcdir="${src}" destdir="${build}/auth-db/dao" classpath="${dist}/auth-db/auth-model-${modelver}.jar:${lib}/log4j-1.2.16.jar" sourcepath="" includeantruntime="false" debug="on">
+			<include name="it/csi/webauth/db/dao/**" />
+		</javac>
+	</target>
+
+	<target name="dist-auth-dao" depends="compile-auth-dao" description="Generate the authentication db interface archive">
+		<mkdir dir="${dist}/auth-db" />
+		<jar jarfile="${dist}/auth-db/auth-dao-${daover}.jar" basedir="${build}/auth-db/dao">
+			<manifest>
+				<attribute name="Built-By" value="CSI" />
+				<attribute name="Implementation-Vendor" value="CSI" />
+				<attribute name="Implementation-Title" value="Auth DB dao" />
+				<attribute name="Implementation-Version" value="${daover}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="dist-authdbmanager" depends="dist-auth-model,dist-auth-dao" description="Build all the project">
+	</target>
+
+</project>

@@ -1,0 +1,276 @@
+<script language="JavaScript">
+
+function calendarCallback(day, month, year)
+{
+  date = day + '/' + month + '/' + year;
+  document.forms["userField"].data_scadenza.value = date;
+}
+
+#if ( !$utente.idUtente )
+
+function checkData(formObj)
+{
+  var status = false;
+  var user = (formObj.utente.value).trim();
+  var pwd = (formObj.password.value).trim();
+  var pwdconfirm = (formObj.conferma_password.value).trim();
+  if((user==null || user.length==0)&&(pwd==null||pwd.length==0))
+  {
+    window.alert("Specificare lo username e la password");
+    status = false;
+  }
+  else if((user==null || user.length==0) && (pwd!=null||pwd.length!=0))
+  {
+    window.alert("Specificare lo username");
+    status = false;
+  }
+  else if((user!=null || user.length!=0) && (pwd==null||pwd.length==0))
+  {
+    window.alert("Specificare la password");
+    status = false;
+  }
+  else if (pwd.length < 6)
+  {
+    window.alert("La password deve contenere \n almeno sei caratteri!");
+    status = false
+  }
+  else if(pwd != pwdconfirm)
+  {
+    var msg = "La password non e' stata confermata!\n";
+    msg += "Inserire di nuovo la password."; 
+    window.alert(msg);
+    document.forms["userField"].password.value="";
+    document.forms["userField"].conferma_password.value="";
+    status = false;
+  }
+  else status = true;
+  return status;	 
+}
+
+#else
+
+function checkPasswordChange(formObj)
+{
+  var status = false;
+  var pwd = (formObj.password.value).trim();
+  var pwdconfirm = (formObj.conferma_password.value).trim();
+  
+  if(pwd==null ||pwd.length==0)
+  {
+  	status = true;
+  }
+  else if (pwd.length < 6)
+  {
+    window.alert("La password deve contenere \n almeno sei caratteri!");
+    status = false
+  }
+  else if(pwd != pwdconfirm)
+  {
+    var msg = "La password non e' stata confermata!\n";
+    msg += "Inserire di nuovo la password."; 
+    window.alert(msg);
+    document.forms["userField"].password.value="";
+    document.forms["userField"].conferma_password.value="";
+    status = false;
+  }
+  else status = true;
+  
+  return status;
+}
+
+function checkDelete()
+{
+  var username = document.forms["userDelete"].deleteuser.value;
+  if(username==null ||username=="")
+  {
+    window.alert("Nessun utente selezionato");
+    return false;
+  }
+  else
+  {
+    var confirm = window.confirm("Sei sicuro di voler cancellare l'utente selezionato ?");
+    return confirm;
+  }  
+}
+
+#end
+</script>
+
+#if( $utente.idUtente )
+	<h2>Modifica utente $utente.utente</h2>
+#else
+	<h2>Nuovo utente</h2>
+#end
+<div class="contenuti">
+	<form name="userField" action="$action" method="post"
+		#if( $utente.idUtente )
+			onSubmit="javascript:return checkPasswordChange(this);"
+		#else
+			onSubmit="javascript:return checkData(this);"
+		#end
+	>
+		<input name="writeuser" type="hidden" 
+			value=#if($utente.idUtente) "$utente.idUtente" #else "" #end/>
+		<table>
+			<tr>
+				<td><h3>Informazioni</h3></td>
+				<td width="20"></td>
+				<td width="350"><h3>Gruppi di appartenenza</h3></td>
+			</tr>
+			<tr>
+				<td>				
+				<table>
+					#if ( !$utente.idUtente )
+					<tr>
+						<th><label>Nome Utente:</label></th>
+						<td><input class="inputField" name="utente" type="text"
+							size="32" maxlength="32" 
+							value=#if($utente.utente) "$utente.utente" #else "" #end/>
+						</td>
+					</tr>
+					#end
+					<tr>
+						<th><label>Nome:</label></th>
+						<td><input class="inputField" name="nome" type="text"
+							size="32" maxlength="32"
+							value=#if($utente.nome) "$utente.nome" #else "" #end/>
+						</td>
+					</tr>
+					<tr>
+						<th><label>Cognome:</label></th>
+						<td><input class="inputField" name="cognome" type="text"
+							size="32" maxlength="32"
+							value=#if($utente.cognome) "$utente.cognome" #else "" #end/>
+						</td>
+					</tr>
+					<tr>
+						<th><label>Azienda:</label></th>
+						<td><input class="inputField" name="azienda" type="text"
+							size="32" maxlength="32"
+							value=#if($utente.azienda) "$utente.azienda" #else "" #end/>
+						</td>
+					</tr>
+					<tr>
+						<th><label>E-mail:</label></th>
+						<td><input class="inputField" name="mail" type="text"
+							size="32" maxlength="64"
+							value=#if($utente.mail) "$utente.mail" #else "" #end/>
+						</td>
+					</tr>
+					<tr>
+						<th><label>Telefono:</label></th>
+						<td><input class="inputField" name="telefono" type="text"
+							size="32" maxlength="32"
+							value=#if($utente.telefono) "$utente.telefono" #else "" #end/>
+						</td>
+					</tr>
+					<tr>
+						<th><label>Indirizzo:</label></th>
+						<td><input class="inputField" name="indirizzo" type="text"
+							size="32" maxlength="64"
+							value=#if($utente.indirizzo) "$utente.indirizzo" #else "" #end/>
+						</td>
+					</tr>
+					<tr>
+						<th><label>Ambito:</label></th>
+						<td><select name="ambito" multiple="multiple" size="10">
+								#foreach( $ambito in $list_domains)
+									#if($list_user_domains.contains($ambito.ambito))
+										<option selected>$ambito.ambito</option>
+									#else
+										<option>$ambito.ambito</option>
+									#end
+								#end
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th><label>Abilitazione:</label></th>
+						<td>
+							<label>Si&nbsp;</label>
+							<input name="abilitazione" type="radio" value="true"
+								#if ($utente.abilitazione) 
+									checked 
+								#end
+							/>
+							<label>No&nbsp;</label>
+							<input name="abilitazione" type="radio"	value="false"
+								#if (!$utente.abilitazione) 
+									checked 
+								#end
+							/>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<label>Data di scadenza:<br/>(gg/mm/aaaa)</label>
+						</th>
+						<td><input class="inputField" name="data_scadenza" type="text"
+							value=#if ($utente.dataScadenza) "$dateFmt.format($utente.dataScadenza)" #else "nessuna" #end/>
+							<script language="JavaScript" type="text/javascript">
+							<!--
+							objCalendar = new Calendar('objCalendar', 'calendarCallback');
+							//-->
+							</script>
+						</td>
+					</tr>
+					<tr>
+						<th><label>Password:</label></th>
+						<td><input class="inputField" name="password" type="password"
+							value="" size="32" maxlength="40"></td>
+					</tr>
+					<tr>
+						<th><label>Conferma password:</label></th>
+						<td><input class="inputField" name="conferma_password"
+							type="password" value="" size="32" maxlength="40"></td>
+					</tr>
+				</table>
+				</td>
+				<td width="20"></td>
+				<td>
+					#if ( !$list_groups.isEmpty() )
+						<div class="scrollBox" height="100%">
+							<table width="100%" cellspacing=0>
+								 #foreach( $gruppo in $list_groups )
+									<tr>
+										<td class="scrollBoxFirstCell">
+											<input type="checkbox" name="$gruppo.gruppo"
+												#if ( $gruppo.getSelected() ) 
+													checked 
+												#end
+											/>
+										</td>
+										<td class="scrollBoxLastCell">
+											#if ( $gruppo.gruppo ) 
+												$gruppo.gruppo 
+											#end -
+											#if ( $gruppo.descrizione ) 
+												$gruppo.descrizione 
+											#end
+										</td>
+									</tr>
+								 #end
+							</table>
+						</div>
+					#end
+				</td>
+			</tr>
+			<tr>
+				<td><input class="tasto" type="submit" value="Salva utente" /> 							
+				</td>
+			</tr>
+		</table>
+	</form>
+	<br />
+	#if ( $utente.idUtente )
+	<div class="pulsanti">		
+			<form name="userDelete" action="$action" method="post"
+				onSubmit="javascript:return checkDelete(this);">
+				<input type="hidden" name="deleteuser" value="$utente.idUtente" />
+				&nbsp; <input class="tasto" type="submit" value="Cancella utente" />
+			</form>
+    </div>	
+	#end
+	<br />
+	#parse( "webauth/navBar.vm" )
+</div>

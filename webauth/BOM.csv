@@ -1,0 +1,10 @@
+name+version*;license*;Copyrights*;end-of-support;dependencies;language;repository;email;url
+commons-codec-1.4.jar;Apache-2.0;-;-;-;Java;-;-;-
+commons-collections-3.2.1.jar;Apache-2.0;-;-;-;Java;-;-;-
+commons-lang-2.4.jar;Apache-2.0;-;-;-;Java;-;-;-
+log4j-1.2.16.jar;Apache-2.0;-;-;-;Java;-;-;-
+servlet-api-2.5.jar;"CDDL-1.0; GPL-2.0";-;-;-;Java;-;-;-
+velocity-1.6.4.jar;Apache-2.0;-;-;-;Java;-;-;-
+auth-dao-1.0.0.jar;EUPL 1.2;CSI-Piemonte;-;-;Java;-;-;-
+auth-model-1.0.0.jar;EUPL 1.2;CSI-Piemonte;-;-;Java;-;-;-
+browserSniffer.js;Permission granted to reuse and distribute.;Netscape Communications 1999-2001;;;;;;

@@ -1,0 +1,22 @@
+<h2>#if($result) Informazione #else Errore #end</h2>
+<div class="contenuti">
+<div class="messaggio">#if($message) $message #end</div>
+	<table class="report">
+		<tr>
+			<th>Utente</th>
+			<th>Nome</th>
+		</tr>
+		#foreach( $ug in $lista_utenti)
+			<form>
+				<input name="groupid" type="hidden"	value="$ug.idUtente" />
+				<tr>
+					<td>$ug.utente</td>
+					<td>
+						#if($ug.nome)$ug.nome#end &nbsp; #if($ug.cognome)$ug.cognome#end
+					</td>
+				</tr>
+			</form>
+		#end
+	</table>
+	#parse( "webauth/navBar.vm" )
+</div>

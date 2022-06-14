@@ -1,0 +1,159 @@
+<!-- Title:  Build and release procedures for Centrale DB project -->
+<!-- Author: pierfrancesco.vallosio@consulenti.csi.it -->
+<!-- Date:   16-Dicember-2015 -->
+<!-- $Id:$ -->
+
+<project name="dbauth2" basedir="." default="default">
+
+	<property file="buildfiles/build.properties" />
+	<property environment="env" />
+
+	<!-- ############################################################# -->
+	<!-- # public target: default                                    # -->
+	<!-- ############################################################# -->
+	<target name="default" description="Verifica se eseguire il build per un solo environment specificato a linea di commando con -Dtarget=${target} o per tutti gli environment ">
+		<condition property="first-call" value="distribution">
+			<not>
+				<equals arg1="${target}" arg2="$${target}" />
+			</not>
+		</condition>
+		<condition property="first-call" value="all-target">
+			<equals arg1="${target}" arg2="$${target}" />
+		</condition>
+		<echo message="target: ${target}" />
+		<echo message="first-call: ${first-call}" />
+		<antcall target="${first-call}" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: all-target                                 # -->
+	<!-- ############################################################# -->
+	<target name="all-target" description="Lancia il build per le varie distribuzioni in sequenza">
+		<antcall target="distribution">
+			<param name="target" value="dev" />
+		</antcall>
+		<antcall target="distribution">
+			<param name="target" value="tst" />
+		</antcall>
+		<antcall target="distribution">
+			<param name="target" value="coll" />
+		</antcall>
+		<antcall target="distribution">
+			<param name="target" value="prod" />
+		</antcall>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: init                                       # -->
+	<!-- ############################################################# -->
+	<target name="init" description="Inizializza lo script Ant">
+		<tstamp>
+			<format property="ANNO-COPYRIGHT" pattern="yyyy" />
+			<format property="current.date" pattern="dd/MM/yyyy HH:mm:ss" locale="it" />
+		</tstamp>
+		<echo message="current.date: ${current.date}" />
+		<condition property="target" value="dev">
+			<equals arg1="${target}" arg2="$${target}" />
+		</condition>
+		<echo message="target: ${target}" />
+		<loadproperties srcFile="${buildfiles}/${target}.properties" />
+		<property name="temp-target" value="${temp}/${target}" />
+		<property name="dist-target" value="${dist}/${target}" />
+		<mkdir dir="${temp-target}" />
+		<mkdir dir="${dist-target}" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: compile-all                                # -->
+	<!-- ############################################################# -->
+	<target name="compile-all" depends="init" description="Compila tutti i sorgenti">
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: package-all                                # -->
+	<!-- ############################################################# -->
+	<target name="package-all" depends="init" description="Esegue il packaging di ogni componente del prodotto">
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: distribution                               # -->
+	<!-- ############################################################# -->
+	<target name="distribution" depends="init" description="Costruisce il tar per la distribuzione">
+		<tar destfile="${dist-target}/dbcentrale_V${product-version}_${DSTAMP}.tgz" compression="gzip">
+			<tarfileset dir="${src-sql}">
+				<include name="**/*" />
+			</tarfileset>
+			<tarfileset dir=".">
+				<include name="changelog.md" />
+				<include name="Copyrights.txt" />
+				<include name="CodeOfConduct.md" />
+				<include name="License.txt" />
+				<include name="AUTHORS.txt" />
+				<include name="Maintainers.txt" />
+				<include name="CONTRIBUTORS.txt" />
+				<include name="README.md" />
+			</tarfileset>
+		</tar>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: clean-dist                                 # -->
+	<!-- ############################################################# -->
+	<target name="clean-dist" description="Rimuove la cartella delle distribuzioni">
+		<delete dir="${dist}" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: clean-temp                                 # -->
+	<!-- ############################################################# -->
+	<target name="clean-temp" description="Rimuove la cartella dei files temporanei di build">
+		<delete dir="${temp}" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # private target: clean                                     # -->
+	<!-- ############################################################# -->
+	<target name="clean" depends="clean-temp, clean-dist" description="Rimuove tutte le cartelle create da Ant" />
+
+	<!-- ############################################################# -->
+	<!-- # public target: clean-all                                  # -->
+	<!-- ############################################################# -->
+	<target name="clean-all" depends="clean" description="Rimuove tutte le cartelle create da Ant" />
+
+	<!-- ############################################################# -->
+	<!-- # public target: show-vars                                  # -->
+	<!-- ############################################################# -->
+	<target name="show-vars" depends="init" description="Visualizza tutte le variabili impostate nei file di properties e/o da linea di comando">
+		<echo message="*****************************************" />
+		<echo message="********  ${product-name} environment  *******" />
+		<echo message="*****************************************" />
+		<echo message="Runtime:" />
+		<echo message="JAVA_HOME = ${env.JAVA_HOME}" />
+		<echo message="ANT_HOME = ${env.ANT_HOME}" />
+		<echo message="JAVA_VERSION = ${java.version}" />
+		<echo message="ANT_VERSION = ${ant.version}" />
+		<echo message="" />
+		<echo message="Target:" />
+		<echo message="TARGET = ${target}" />
+		<echo message="" />
+		<echo message="Application:" />
+		<echo message="VERSION = ${product-version}" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: about                                      # -->
+	<!-- ############################################################# -->
+	<target name="about" description="Visualizza l'elenco dei target pubblici dello script">
+		<loadfile property="about" srcFile="buildfiles/about.txt" />
+		<echo message="${about}" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: about-custom                               # -->
+	<!-- ############################################################# -->
+	<target name="about-custom" description="Visualizza l'elenco dei target privati dello script">
+		<loadfile property="about-custom" srcfile="buildfiles/about-custom.txt" />
+		<echo message="${about-custom}" />
+	</target>
+
+</project>

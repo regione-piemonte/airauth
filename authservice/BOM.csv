@@ -1,0 +1,6 @@
+name+version*;license*;Copyrights*;end-of-support;dependencies;language;repository;email;url
+log4j-1.2.16.jar;Apache-2.0;-;-;-;Java;-;-;-
+auth-dao-1.0.0.jar;EUPL 1.2;CSI-Piemonte;-;-;Java;-;-;-
+auth-model-1.0.0.jar;EUPL 1.2;CSI-Piemonte;-;-;Java;-;-;-
+servlet-api-2.5.jar;"CDDL-1.0; GPL-2.0";-;-;-;Java;-;-;-
+javax.ws.rs-api-2.0.jar;"CDDL-1.1; GPL-2.0";-;-;-;Java;-;-;-

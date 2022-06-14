@@ -1,0 +1,147 @@
+body{padding:0;font-size:80%;font-family:Arial, Verdana, Helvetica, Geneva, Swiss, SanSans-Regular, sans-serif;
+margin:0 0 4px 0;width:100%; }
+
+acronym {border-bottom:1px dashed black;cursor:help;}
+a, a:link, a:visited {font-weight:bold;color:#295A7E;text-decoration:none;}
+a:focus {outline:0;}
+a:hover, a:active{text-decoration:underline;}
+.alt, .nascosto, .navigazionePagina, h3.alt{clear:none;z-index:51;left:-10000px;width:0;position:absolute;top:-10000px;height:0;}
+form {margin:0;padding:0;}
+
+body{background:url(images/sfondo.gif) repeat-x 0px 94px;}
+#pagina{margin:0 auto;position:relative}
+
+#contenitore {text-align:center;margin:0;padding:0;font-size:1em;}
+#corpo {overflow:hidden;border-left:4px solid #fff;border-right:4px solid #fff;padding:0;margin:0 auto;}
+
+#sfondo{text-align:left;width:100%;background:#E9EBEA;position:static!important;position:relative;overflow /**/:hidden;}
+#colonna{margin:0;padding:0;height:auto!important;height:278px;background-color: #E9EBEA;text-align:left; }
+#contenuti{ padding:6px 10px;}
+
+h1{padding:0;display:block;font-weight:bold;font-size:1.8em;z-index:53;left:50%;margin:0 0 0 -330px;width:500px;color:#7b7a7f;position:absolute;top:23px;}
+h2{padding:0 0 0 6px;font-size:1.2em;color:#000;}
+h3{padding:12px 0 2px 6px;font-size:1.2em;color:#000;}
+h4{padding:10px 0 2px 6px;font-size:1.1em;color:#000;}
+h5{padding:8px 0 2px 6px;font-size:1.0em;color:#000;}
+#colonna h2{color:#333;background:#a7c3df;text-align:left; margin:0; padding:3px 6px;border-bottom:1px solid #fff;clear: both;}
+#colonna h3{color:#1C6AAC;text-align:left; margin:0;}
+#colonna h4{text-align:left; margin:0;}
+#colonna h5{text-align:left; margin:0;}
+#colonna h2 a, #colonna h2 a:link, #colonna h2 a:active, #colonna h2 a:visited{color:#333;}
+hr{display:none;}
+
+#colonna table{ width:100%; font-size:13px;}
+#colonna table th{ background:#fff; padding:2px 3px; text-align: left;}
+#colonna .box_login table {margin:10px auto; width:300px;}
+#colonna .box_login table th{ background:none; padding:2px 3px;font-size:1.2em;}
+#colonna table td{  padding:2px 3px;}
+#colonna table.report th, table.report th{ background:#ccc; padding:2px 3px;}
+#colonna table.report td, table.report td{  padding:2px 3px;background:#fff;}
+#colonna table.compact{ width:auto; font-size:13px;}
+#colonna table td.img img{ float:left;}
+
+input.richiedi{background:transparent url(images/refresh.png) 0 0 no-repeat; border:0;cursor:pointer;cursor:hand; font-size:0; line-height:0; height:16px; width:16px;}
+input.actual{ background:transparent url(images/ingranaggi_attivi_small.gif) 0 0 no-repeat; height:20px; width:20px;}
+input.history{ background:transparent url(images/ingranaggi_nonattivi_small.gif) 0 0 no-repeat; height:20px; width:20px;}
+
+#colonnaSinistra{float:left; width:250px!important; height:auto!important; height:517px; margin:0; border-left:4px solid #fff; border-top:4px solid #fff;}
+
+#colonna .contenuti, .contenuti{background:#E9EBEA;margin:0;padding:10px;height:auto;}
+
+#colonna .contenuti ul{list-style-type:none;margin:3px 0 6px 10px;padding:0;}
+#colonna .contenuti ul a:visited{color:#1463a2;}
+#colonna .contenuti ul li{background:url(images/listImage.gif) 0 4px no-repeat;padding-left:10px;}
+#colonna .contenuti ul li ul li {font-weight:normal;}
+#colonna .contenuti ul .esterno{background:url(images/linkesterni.gif) 0 0    no-repeat; width:20px; padding-left:8px; }
+
+
+#menuNav{margin:2px 0;background:#fff;}
+#menuNav ul.menu{padding:0; list-style:none; margin:0;border-top:1px solid #fff;border-bottom:1px solid #fff; height:18px;} 
+#menuNav ul.menu li{ float:left; height:18px; border-right:1px solid #fff; line-height:18px;}
+#menuNav ul.menu li a{ background:#1A578E; color:#fff;padding:4px 16px;}
+#menuNav ul.menu li.attivo{ background:#fff; color:#1A578E;padding:0px 16px;}
+
+.divboth{display:block;}
+
+#colonna div.box_img{background:transparent url(images/img_presentazione.jpg) 0 0 no-repeat; padding-left:480px; height:320px;  }
+.messaggio{border:1px solid #000;padding:12px 8px;margin:0 0 8px 0;font-weight:bold;background-color:#fff;color:#000;text-align:center; margin:10px 8px;font-size:15px;}
+.messaggio span{font-weight:normal;color:#000;}
+.box_login{padding:40px 40px;margin:0 ;}
+a img, a:link img, a:visited img{ border: 0 none;}
+
+#colonna div.statusUnknown{ background:url(images/statusUNKNOWN.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.statusOk{ background:url(images/statusOK.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.statusWarn{ background:url(images/statusWARN.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.statusAlarm{ background:url(images/statusALARM.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.dbOk{ background:url(images/dbOK.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.dbAlarm{ background:url(images/dbALARM.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.batteryVeryLow{ background:url(images/batteryVeryLow.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.batteryLow{ background:url(images/batteryLow.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.onBattery{ background:url(images/batteryOK.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.overvoltage{ background:url(images/overVoltage.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.voltageOK{ background:url(images/voltageOK.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.voltageUnknown{ background:url(images/voltageUnknown.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.temperatureUnknown{ background:url(images/temperatureUnknown.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.doorOpen{ background:url(images/open_door.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna div.doorClosed{ background:url(images/close_door.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna table div.timeUnknown{ background:url(images/timeUNKNOWN.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna table div.timeOk{ background:url(images/timeOK.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna table div.timeAlarm{ background:url(images/timeALARM.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna table div.rangeUnknown{ background:url(images/rangeUNKNOWN.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna table div.rangeOk{ background:url(images/rangeOK.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna table div.rangeAlarmHi{ background:url(images/rangeALARM_HI.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna table div.rangeAlarmLo{ background:url(images/rangeALARM_LO.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:left;}
+#colonna table div.connected{ background:url(images/connected.png) 0 0 no-repeat; height:16px; width:16px; display:block;float:right;}
+
+#icon-connected { background:transparent url(images/connected.png) no-repeat top left; width: 16px; height: 16px; margin: 0; padding: 0; border: 0; text-indent: 20px; overflow: hidden; font-size: 0; line-height: 0; vertical-align: middle; cursor: pointer;}
+#btn-img-delete { background:transparent url(images/delete_small.png) no-repeat top left; width: 20px; height: 20px; margin: 0; padding: 0; border: 0; text-indent: 20px; overflow: hidden; font-size: 0; line-height: 0; vertical-align: middle; cursor: pointer;}
+#btn-img-sensor { background:transparent url(images/sensor.png) no-repeat top left; width: 16px; height: 16px; margin: 0; padding: 0; border: 0; text-indent: 20px; overflow: hidden; font-size: 0; line-height: 0; vertical-align: middle; cursor: pointer;}
+#btn-img-reload-red { background:transparent url(images/reload-red.png) no-repeat top left; width: 16px; height: 16px; margin: 0; padding: 0; border: 0; text-indent: 20px; overflow: hidden; font-size: 0; line-height: 0; vertical-align: middle; cursor: pointer;}
+#updateDomain{background:url(images/updatedomain.png) no-repeat top left; width: 45px; height: 45px; margin: 0; padding: 0; border: 0; text-indent: 20px; overflow: hidden; font-size: 0; line-height: 0; vertical-align: middle; cursor: pointer;}
+#deleteDomain{background:url(images/deletedomain.png) no-repeat top left; width: 45px; height: 45px; margin: 0; padding: 0; border: 0; text-indent: 20px; overflow: hidden; font-size: 0; line-height: 0; vertical-align: middle; cursor: pointer;}
+
+#colonna table td.down, #colonna table td.modifica, #colonna table td.actual, #colonna table td.history{ width:32px;}
+#colonna table td.actual{ background:#fff url(images/ingranaggi_attivi_small.gif) 3px 0 no-repeat; height:20px; width:20px; _display:block;}
+#colonna table td.modifica a{ background:transparent url(images/edit.jpg) 0 0 no-repeat; height:32px; width:32px; display:block;}
+#colonna table td.down a{ background:transparent url(images/down.jpg) 0 0 no-repeat; height:32px; width:32px; display:block;}
+#colonna table td.reload a{ background:transparent url(images/refresh.png) 0 0 no-repeat; height:16px; width:16px; display:block;}
+#colonna table td.history{ background:#fff url(images/ingranaggi_nonattivi_small.gif) 3px 0 no-repeat; height:20px; width:20px;_display:block;}
+#colonna table th.icoDx {position:relative;}
+#colonna table div.up{ float:right; }
+#colonna table div.up a{ background:transparent url(images/up.png) 0 0 no-repeat; height:25px; width:28px; display:block;}
+#colonna table td.bold{font-weight: bold;}
+
+input.inputImage{cursor:pointer;}
+input.tasto{background:url(images/bkg_pulsnav.jpg) no-repeat 0 0 transparent; color: #333;  cursor: pointer; font-size: 0.95em; font-weight: bold; padding: 3px 4px; border:1px solid #333;}
+input.tastoNav{background:url(images/bkg_nav.jpg) repeat-x 0 0 transparent; color: #333;  cursor: pointer; font-size: 0.95em; font-weight: bold; padding: 3px 7px; border:1px solid #333;}
+input.addnewUser{background:url(images/pulsUser.jpg) no-repeat 0 50% #d3d3d3; color: #333;  cursor: pointer; font-size: 0.95em; font-weight: bold; padding:15px 4px 18px 40px; border:1px solid #333;}
+input.addnewGroup{background:url(images/pulsGroup.jpg) no-repeat 0 50% #d3d3d3; color: #333;  cursor: pointer; font-size: 0.95em; font-weight: bold;  padding:15px 4px 18px 50px; border:1px solid #333;}
+input.addnewDomain{background:url(images/pulsDomain.jpg) no-repeat 0 50% #d3d3d3; color: #333;  cursor: pointer; font-size: 0.95em; font-weight: bold; padding:15px 4px 18px 50px; border:1px solid #333;}
+input.addnewAcl{background:url(images/pulsAcl.jpg) no-repeat 0 50% #d3d3d3; color: #333;  cursor: pointer; font-size: 0.95em; font-weight: bold; padding:15px 4px 18px 50px; border:1px solid #333;}
+select.fixedWidth{width:400px;}
+select.fixedMediumWidth{width:258px;}
+input.editDate{width:80px;}
+
+input.searchuser{background:transparent url(images/bkg_searchuser.jpg) 0 0 no-repeat; cursor:pointer;cursor:hand; font-size:0; line-height:0; height:45px; width:52px;border:1px solid #333;}
+input.expireduser{background:transparent url(images/bkg_searchuser.jpg) 0 0 no-repeat; cursor:pointer;cursor:hand; font-size:0; line-height:0; height:45px; width:52px;border:1px solid #333;}
+
+textarea{font-family:Arial, Verdana, Helvetica, Geneva, Swiss, SanSans-Regular, sans-serif; size:13px;}
+a.tasto, a.tasto:link, a.tasto:visited, a.tasto:active {background:url(images/bkg_pulsnav.jpg) no-repeat 0 0 transparent; color: #000;  font-size: 1.1em; font-weight: bold;   padding: 3px 4px; border:1px solid #333;}
+a.tastoNav, a.tastoNav:link, a.tastoNav:visited, a.tastoNav:active {background:url(images/bkg_nav.jpg) repeat-x 0 0 transparent; color:#000; font-size: 1.1em; font-weight:bold;  padding: 3px 7px; border:1px solid #333;}
+#colonna table span.dx{position:absolute; right:20px; top:123px;}
+
+td.tdmedia{width:200px; vertical-align:top;}
+#colonna table.report th.mini{width:60px; }
+#colonna table.report td.mini, #colonna table td.mini{width:30px; }
+.pulsantileft{padding:10px 7px; margin:10px auto;text-align:left;}
+.pulsanti{padding:10px 7px; margin:10px auto;text-align:center;}
+.box_evidenza{ text-align:center; font-weight:bold;}
+.evid{  font-weight:bold;}
+.box{margin:0 22%; text-align:center;}
+#colonna .box h2{background:url(images/bkg_h2.jpg) no-repeat 0 0 transparent; color: #333;  font-size: 1.1em; font-weight: bold; border:1px solid #333; margin: 15px auto 0 auto; }
+#colonna .box h2, #colonna .box h2 a{ text-align:center; width: 200px; display: block;}
+#colonna .box h2 a img {vertical-align: middle;}
+#colonna .box table td {text-align:left;}
+#colonna .box table fieldset {width:97%;}
+#colonna table.report td.noBck{background:none; width:120px;}
+#colonna table.report td.noBck2 {background:none; width:50px;}
