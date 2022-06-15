@@ -47,11 +47,11 @@ description:
        - gestione ambiti
        - gestione associazioni
     screenshots:
-       - screenshoots/1_principale.png
-       - screenshoots/2_gestione_utenti.png
-       - screenshoots/3_gestione_gruppi.png
-       - screenshoots/4_gestione_ambiti.png
-       - screenshoots/5_gestione_associazioni.png
+       - screenshots/1_principale.png
+       - screenshots/2_gestione_utenti.png
+       - screenshots/3_gestione_gruppi.png
+       - screenshots/4_gestione_ambiti.png
+       - screenshots/5_gestione_associazioni.png
 legal:
   license: EUPL-1.2
   mainCopyrightOwner: Regione Piemonte
